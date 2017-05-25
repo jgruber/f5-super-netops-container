@@ -1,0 +1,11 @@
+#!/bin/bash
+
+export ENV=validate_neutron_for_f5_services
+export BASE_DIR=/openstack
+export WORKINGDIRECTORY=$BASE_DIR/$ENV
+
+. $BASE_DIR/init-functions
+
+validate_os_creds
+
+python $WORKINGDIRECTORY/validate_os_for_f5.py

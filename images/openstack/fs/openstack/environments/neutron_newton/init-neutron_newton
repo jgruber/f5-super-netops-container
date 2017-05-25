@@ -1,0 +1,16 @@
+#!/bin/bash
+
+export ENV=neutron_newton
+export BASE_DIR=/openstack
+export WORKINGDIRECTORY=$BASE_DIR/$ENV
+export TEMPEST_CONFIG_DIR=$WORKINGDIRECTORY/etc
+
+. $BASE_DIR/init-functions
+
+validate_os_creds
+
+cd $WORKINGDIRECTORY
+. ./bin/activate
+./tools/populate-conf-from-env
+
+

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+export BASE_DIR=/openstack
+export ENV=lbaasv2_f5driver_mitaka
+export WORKINGDIRECTORY=$BASE_DIR/$ENV
+export TEMPEST_CONFIG_DIR=$WORKINGDIRECTORY/etc
+
+. $BASE_DIR/init-functions
+
+validate_os_creds
+validate_bigip_creds
+
+cd $WORKINGDIRECTORY
+. ./bin/activate
+./tools/populate-conf-from-env
+
+

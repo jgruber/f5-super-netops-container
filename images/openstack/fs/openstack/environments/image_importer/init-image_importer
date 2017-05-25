@@ -1,0 +1,15 @@
+#!/bin/bash
+
+export BASE_DIR=/openstack
+export ENV=image_importer
+export WORKINGDIRECTORY=$BASE_DIR/$ENV
+export IMAGE_DIR=/bigip_images
+
+. $BASE_DIR/init-functions
+
+validate_os_creds
+
+cd $WORKINGDIRECTORY
+python bigip_image_import.py
+cd $BASE_DIR
+

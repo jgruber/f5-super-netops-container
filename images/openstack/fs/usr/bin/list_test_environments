@@ -1,0 +1,6 @@
+#!/bin/bash
+
+BASE_DIR=/openstack
+
+ls -d $BASE_DIR/environments/*/ | cut -f4 -d'/'
+
