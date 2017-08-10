@@ -13,6 +13,15 @@ def debug(msg):
 	if args.debug:
 		print "DEBUG: %s" % (msg)
 
+def safe_open(fn, mode='r'):
+	try:
+		fh = open(fn, mode)
+	except IOError as e:
+		print "Open of file '{0}' failed({1}): {2}".format(args[0], e.errno, e.strerror)
+		sys.exit(1)
+
+	return fh
+
 # Setup and process arguments
 parser = argparse.ArgumentParser(description='Script to clone git repos')
 parser.add_argument("-f", "--filename", default="/home/snops/repos.json", help="The JSON repo file")
@@ -22,28 +31,22 @@ args = parser.parse_args()
 
 print "[cloneGitRepos] Loading repositories from %s" % (args.filename)
 
-try:
-	repo_file = open(args.filename)
-except IOError as error:
-	print "[cloneGitRepos][error] Open of file \"%s\" failed: %s" % (args.filename, error)
-	sys.exit(1)
+repo_file = safe_open(args.filename)
 
 try:
 	repo_dict = json.load(repo_file)
 except (ValueError, NameError) as error:
-	print "[clo][error] JSON format error in file \"%s\": %s" % (args.filename, error)
+	print "[cloneGitRepos][error] JSON format error in file \"%s\": %s" % (args.filename, error)
 	sys.exit(1)
+
+repo_file.close()
 
 debug(json.dumps(repo_dict, indent=1))
 
 numrepos = len(repo_dict["repos"])
 print "[cloneGitRepos] Found %s repositories to clone..." % numrepos
 
-try:
-    log = open('/home/snops/log/cloneGitRepos.log', 'a')
-except IOError as e:
-   print "Open of log file failed({0}): {1}".format(e.errno, e.strerror)
-   sys.exit(1)
+log = safe_open('/home/snops/log/cloneGitRepos.log', 'a')
 
 for i in range(0, numrepos):
 	obj = repo_dict["repos"][i]
@@ -52,16 +55,26 @@ for i in range(0, numrepos):
 		print "%s Skipping %s#%s" % (prefix, obj["name"], obj["branch"])
 		continue
 
-	localdir = '/home/snops/%s' % obj["name"]
-	if os.path.isdir(localdir):
+	if 'localdir' not in obj:
+		obj["localdir"] = '/home/snops/%s' % obj["name"]
+
+	if type(obj["branch"]) is dict:
+		if 'env' in obj["branch"] and obj["branch"]["env"] in os.environ:
+			obj["branch"] = os.environ.get(obj["branch"]["env"])
+		elif 'default' in obj["branch"]:
+			obj["branch"] = obj["branch"]["default"]
+		else:
+			obj["branch"] = "master"
+
+	if os.path.isdir(obj["localdir"]):
 		print "%s Pulling %s#%s from %s" % (prefix, obj["name"], obj["branch"], obj["repo"])
-		exitcode = call(['git','pull'], shell=False, stdout=log, stderr=log, cwd=localdir)
+		exitcode = call(['git','pull'], shell=False, stdout=log, stderr=log, cwd=obj["localdir"])
 		if exitcode > 0:
 			print "ERROR: Pull of %s failed, exiting..." % obj["name"]
 			sys.exit(1)
 	else:
 		print "%s Cloning %s#%s from %s" % (prefix, obj["name"], obj["branch"], obj["repo"])
-		gitcmd = 'git clone -b %s %s %s' % (obj["branch"], obj["repo"], localdir)
+		gitcmd = 'git clone -b %s %s %s' % (obj["branch"], obj["repo"], obj["localdir"])
 		debug("gitcmd=%s" % gitcmd)
 		exitcode = call(gitcmd.split(), shell=False, stdout=log, stderr=log)
 		if exitcode > 0:
@@ -72,15 +85,22 @@ for i in range(0, numrepos):
 		print "%s  Skipping install" % (prefix)
 		continue
 
-	if os.path.exists(os.path.join(os.path.sep, 'snopsboot','repo_install',obj["name"])):
-		try:
-		    install_log = open('/home/snops/%s/repo_install.log' % obj["name"], 'a')
-		except IOError as e:
-		   print "Open of install log file failed({0}): {1}".format(e.errno, e.strerror)
-		   sys.exit(1)
+	install_fn = '%s/snops_install.sh' % obj["localdir"]
 
+	if 'install' in obj and len(obj['install']) > 0:
+			install_script = safe_open(install_fn, 'w')
+
+			for line in obj['install']:
+				install_script.write("%s\n" % line)
+
+			install_script.write('\n')
+			install_script.close()
+
+	if os.path.exists(install_fn):
+		os.chmod(install_fn, 0755)
+		install_log = safe_open('%s/repo_install.log' % obj["localdir"], 'a')
 		print "%s  Installing %s#%s" % (prefix, obj["name"], obj["branch"])
-		exitcode = call(['/snopsboot/repo_install/%s' % obj["name"]], shell=False, stdout=install_log, stderr=install_log, cwd=localdir)
+		exitcode = call(['/bin/bash','-c','%s/snops_install.sh' % obj["localdir"]], shell=False, stdout=install_log, stderr=install_log, cwd=obj["localdir"])
 		install_log.close()
 		if exitcode > 0:
 			print "ERROR: Install of %s failed(%s), exiting..." % (obj["name"], exitcode)
@@ -88,3 +108,6 @@ for i in range(0, numrepos):
 
 	i += 1
 
+done = safe_open('/snopsboot/SNOPS_ENV', 'a')
+done.write('SNOPS_CLONE_DONE=1\n')
+done.close()

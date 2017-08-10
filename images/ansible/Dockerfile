@@ -18,4 +18,4 @@ COPY fs /
 RUN apk add --update gcc python2-dev linux-headers libc-dev libffi libffi-dev openssl openssl-dev py-virtualenv 
 
 #install ansible
-RUN pip install ansible bigsuds f5-sdk netaddr ipython
+RUN pip install ansible bigsuds f5-sdk netaddr ipython deepdiff ansible-lint ansible-review

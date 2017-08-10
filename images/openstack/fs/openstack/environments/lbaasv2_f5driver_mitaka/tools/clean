@@ -1,5 +1,1 @@
-#!/bin/bash
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-$DIR/clean-os-from-testing.sh
-$DIR/clean-bigip-from-testing.sh
-
+../../../common/tools/clean

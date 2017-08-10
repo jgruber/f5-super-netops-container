@@ -1,7 +1,7 @@
 # Regex file
 
 #
-# Blacklist for Newton neutron-lbaas tests
+# Blacklist for Mikata neutron-lbaas tests
 #
 
 # Test for Non-supported Features
@@ -29,6 +29,15 @@
 #
 # TypeError: unbound method _create_health_monitor() must be called with CreateHealthMonitorAdminStateTest instance as first argument (got nothing instead)
 ^neutron_lbaas.tests.tempest.v2.ddt.test_health_monitor_admin_state_up
+
+# 
+# Community tests do not account for DEGRADED loadbalancer state
+#
+# https://bugs.launchpad.net/neutron/+bug/1507050
+#
+^neutron_lbaas.tests.tempest.v2.ddt.test_members_admin_state_up.CreateMemberAdminStateTests
+^neutron_lbaas.tests.tempest.v2.ddt.test_members_admin_state_up.UpdateMemberAdminStateTests
+
 
 #
 # Skipped community tests

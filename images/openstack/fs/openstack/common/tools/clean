@@ -1,0 +1,8 @@
+#!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+$DIR/clean-os-from-testing.sh
+
+if [[ -e $DIR/clean-bigip-from-testing.sh ]]
+then
+    $DIR/clean-bigip-from-testing.sh
+fi
