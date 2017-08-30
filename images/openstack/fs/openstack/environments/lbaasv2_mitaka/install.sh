@@ -44,7 +44,7 @@ cd $DIR
               && pip install -r ./neutron_lbaas/tests/tempest/requirements.txt \
               && mkdir $DIR/tempest \
               && cp -Rf $DIR/lib/python2.7/site-packages/tempest/* $DIR/tempest/ \
-              && pip install --upgrade tempest f5-openstack-agent junitxml python-heatclient \
+              && pip install --upgrade tempest f5-openstack-agent junitxml python-heatclient f5-sdk\
               && pip install python-keystoneclient python-glanceclient python-novaclient python-neutronclient python-heatclient"
 
 # patch files

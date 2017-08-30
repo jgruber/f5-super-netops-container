@@ -355,7 +355,8 @@ def _create_glance_images(f5_heat_template_file, download_server_image,
                            "f5_ve_image_name": image_name,
                            "f5_ve_image_url": f5_ve_image_url,
                            "image_prep_key": image_prep_key,
-                           "apt_cache_proxy_url": None
+                           "apt_cache_proxy_url": None,
+                           "os_distro": "mitaka"
                          },               
             stack_name = "image_importer",
             environment = {},

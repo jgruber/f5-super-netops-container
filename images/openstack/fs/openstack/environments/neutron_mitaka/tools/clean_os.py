@@ -1,1 +1,1 @@
-../../../common/tools/clean_os.py
+../../common/tools/clean_os.py

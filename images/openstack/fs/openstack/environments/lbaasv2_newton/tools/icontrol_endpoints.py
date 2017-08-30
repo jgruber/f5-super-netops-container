@@ -1,1 +1,1 @@
-../../../common/tools/icontrol_endpoints.py
+../../common/tools/icontrol_endpoints.py

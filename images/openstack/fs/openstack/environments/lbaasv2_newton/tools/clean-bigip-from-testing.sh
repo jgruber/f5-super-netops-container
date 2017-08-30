@@ -1,1 +1,1 @@
-../../../common/tools/clean-bigip-from-testing.sh
+../../common/tools/clean-bigip-from-testing.sh

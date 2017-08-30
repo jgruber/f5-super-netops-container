@@ -16,10 +16,12 @@ ENV SNOPS_IMAGE openstack
 COPY fs /
 
 #Add libraries to compile ansible
-RUN apk add --update gcc python2-dev linux-headers libc-dev libffi libffi-dev openssl openssl-dev py-virtualenv 
+RUN apk add --update gcc python2-dev linux-headers libc-dev libffi libffi-dev openssl openssl-dev py-virtualenv util-linux
 
 #install ansible
-RUN pip install f5-sdk netaddr ipython python-openstackclient python-neutronclient python-heatclient Tempest 
+RUN pip install f5-sdk netaddr python-openstackclient python-keystoneclient python-neutronclient python-heatclient Tempest 
+RUN pip install ipython
+
 
 # add interesting f5 tools
 RUN git clone -b mitaka https://github.com/F5Networks/f5-openstack-agent.git
@@ -38,19 +40,19 @@ ENV enable_neutron_liberty=0
 ENV enable_lbaasv2_liberty=0
 
 # test neutron in a mitaka openstack cloud
-ENV enable_neutron_mitaka=0
+ENV enable_neutron_mitaka=1
 
 # test neutron lbaasv2 in a mitaka openstack cloud 
-ENV enable_lbaasv2_mitaka=0
+ENV enable_lbaasv2_mitaka=1
 
 # test f5 lbaasv2 in a mitaka openstack cloud
-ENV enable_lbaasv2_f5driver_mitaka=0
+ENV enable_lbaasv2_f5driver_mitaka=1
 
 # test neutron in a newton openstack cloud
-ENV enable_neutron_newton=0
+ENV enable_neutron_newton=1
 
 # test neutron lbaasv2 in a newton openstack cloud 
-ENV enable_lbaasv2_newton=0
+ENV enable_lbaasv2_newton=1
 
 # test neutron in a ocata openstack cloud
 ENV enable_neutron_ocata=0

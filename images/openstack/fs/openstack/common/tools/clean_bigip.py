@@ -38,12 +38,30 @@ def clean(bigip):
         if folder.name.startswith(env):
             if _yes_or_no("remove BIG-IP tenant folder %s?" % folder.name):
                 print "removing BIG-IP tenant folder %s" % folder.name
-                sh.purge_folder_contents(bigip, folder=folder.name)
-                vaddrs = bigip.tm.ltm.virtual_address_s.get_collection()
-                for va in vaddrs:
-                    if va.partition == folder.name:
-                        va.delete()
-                sh.delete_folder(bigip, folder.name)
+                try:                                                      
+                    vses = bigip.tm.ltm.virtuals.get_collection()    
+                    for vs in vses:                                        
+                        if vs.partition == folder.name:               
+                            vs.delete()                                   
+                    vaddrs = bigip.tm.ltm.virtual_address_s.get_collection()
+                    for va in vaddrs:                                      
+                        if va.partition == folder.name:               
+                            va.delete()                                   
+                    upps = bigip.tm.ltm.persistence.universals.get_collection()    
+                    for upp in upps:                                               
+                        if upp.partition == folder.name:              
+                            upp.delete()                          
+                    rules = bigip.tm.ltm.rules.get_collection(partition=folder.name)
+                    for rule in rules:                                              
+                        if rule.partition == folder.name:                           
+                            rule.delete()                                           
+                    sh.purge_folder_contents(bigip, folder=folder.name)     
+                    sh.delete_folder(bigip, folder.name)                           
+                except:                                                
+                    current_folders = bigip.tm.sys.folders.get_collection()         
+                    for cf in current_folders:                              
+                        if cf.name == folder.name:                                 
+                            raise     
 
 
 def _yes_or_no(question):

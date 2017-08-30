@@ -1,1 +1,1 @@
-../../../common/tools/clean_bigip.py
+../../common/tools/clean_bigip.py

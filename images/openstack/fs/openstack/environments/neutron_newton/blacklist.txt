@@ -1,33 +1,38 @@
 # Regex file
 
 #
-# Blacklist for Mitaka neutron tests
+# Blacklist for Newton neutron tests
 #
 
 # errantly does not respect neutron-server 500 error for DB colum issue
 ^neutron.tests.api.admin.test_shared_network_extension.RBACSharedNetworksTest.test_create_rbac_policy_with_target_tenant_too_long_id
 
+# test generate RBACPolicyInUse errors 
+^neutron.tests.tempest.api.admin.test_shared_network_extension.RBACSharedNetworksTest.test_delete_self_share_rule
+^neutron.tests.tempest.api.admin.test_shared_network_extension.RBACSharedNetworksTest.test_update_self_share_rule
+
 # BGP tests to check for support so they can SKIP, not fail
 ^neutron.tests.api.test_bgp
 
-# Metering extension does not properly check if it is supported so it can SKIP, not fail
+# Metering extension does not properly checked 
 ^neutron.tests.api.test_metering_extensions
+^neutron.tests.tempest.api.test_metering_extensions
 
-# QoS not required for f5 deployment, but has errant tests
+# QOS extension is not properly checked
 ^neutron.tests.api.test_qos
+^neutron.tests.tempest.api.test_qos
+^neutron.tests.tempest.scenario.test_qos
 
-# Tests raises DB exception Column 'target_tenant' cannot be null without properly catching the exception
-^neutron.tests.api.admin.test_shared_network_extension.RBACSharedNetworksTest.test_create_rbac_policy_with_target_tenant_none
+# Port DNS domain not supported in OSPv10
+^neutron.tests.tempest.api.test_revisions.TestRevisions.test_update_dns_domain_bumps_revision 
 
-# Neutron Flavors not enabled by OSPv9 by default
-^neutron.tests.api.test_flavors_extensions
+# Failing test for security group bulk updates
+^neutron.tests.tempest.api.test_security_groups.SecGroupTest.test_create_bulk_sec_groups
 
-# Neutron does not define a default subnetpool OSPv9 by default
-^neutron.tests.api.test_auto_allocated_topology
+# Failing test for Neutron tag over 8 character
+^neutron.tests.tempest.api.test_tag.TagNetworkTestJSON.test_network_tags
 
 # Neutron does not enable DHCPv6 by default
 ^neutron.tests.api.test_dhcp_ipv6
 
-# Timing error with running test after quota tests
-^neutron.tests.api.test_timestamp.TestTimeStamp.test_update_subnet_with_timestamp
 

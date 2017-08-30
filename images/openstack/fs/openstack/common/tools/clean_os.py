@@ -21,6 +21,7 @@ import neutronclient.v2_0.client as netclient
 import novaclient.client as compclient
 import heatclient.client as heatclient
 
+from neutronclient.common.exceptions import NotFound
 
 def _get_keystone_session(project_name=None):
     auth_url = str(os.environ['OS_AUTH_URL']).replace('2.0','3')
@@ -85,6 +86,7 @@ def _getch():
 def _yes_or_no(question):
     # reply = str(raw_input(question+' (y/n): ')).lower().strip()
     sys.stdout.write("%s [Y/N]: " % question)
+    sys.stdout.flush()
     reply = str(_getch()).lower().strip()
     sys.stdout.write('%s\n' % reply)
     if reply[0] == 'y':
@@ -162,139 +164,165 @@ def main():
 
     # remove nova instances
     cc = _get_nova_client()
-    for server in cc.servers.list():
-        if server.tenant_id not in exempt_tenants:
-            print "deleting server %s" % server.name
-            try:
-                server.delete()
-            except:
-                print 'could not delete nove server %s' % server.id
-                if server.tenant_id not in tenants_not_to_remove:
-                    tenants_not_to_remove.append(server.tenant_id)
-    
+    try:
+        for server in cc.servers.list():
+            if server.tenant_id not in exempt_tenants:
+                print "deleting server %s" % server.name
+                try:
+                    server.delete()
+                except:
+                    print 'could not delete nove server %s' % server.id
+                    if server.tenant_id not in tenants_not_to_remove:
+                        tenants_not_to_remove.append(server.tenant_id)
+    except NotFound:
+		pass
+		
     # remove floating IPs
     nc = _get_neutron_client()
-    for fip in nc.list_floatingips()['floatingips']:
-        if fip['tenant_id'] not in exempt_tenants:
-            try:
-                nc.delete_floatingip(fip['id'])
-            except:
-                print 'could not delete floating IP %s' % fip['id']
-                if fip['tenant_id'] not in tenants_not_to_remove:
-                    tenants_not_to_remove.append(fip['tenant_id'])
+    try:
+        for fip in nc.list_floatingips()['floatingips']:
+            if fip['tenant_id'] not in exempt_tenants:
+                try:
+                    nc.delete_floatingip(fip['id'])
+                except:
+                    print 'could not delete floating IP %s' % fip['id']
+                    if fip['tenant_id'] not in tenants_not_to_remove:
+                        tenants_not_to_remove.append(fip['tenant_id'])
+    except NotFound:
+		pass
     
     # remove routers
     nc = _get_neutron_client()
-    for router in nc.list_routers()['routers']:
-        if router['tenant_id'] not in exempt_tenants:
-            print 'remove router gateway'
-            nc.remove_gateway_router(router['id'])
-            for port in nc.list_ports()['ports']:
-                if port['device_id'] == router['id']:
-                    print 'remove router port %s' % port['id']
-                    nc.remove_interface_router(router['id'],{'port_id': port['id']})
-            print 'deleting router %s' % router['id']
-            try:
-                nc.delete_router(router['id'])
-            except:
-                print 'could not delete router %s' % router['id']
-                if router['tenant_id'] not in tenants_not_to_remove:
-                    tenants_not_to_remove.append(router['tenant_id'])
+    try:
+        for router in nc.list_routers()['routers']:
+            if router['tenant_id'] not in exempt_tenants:
+                print 'remove router gateway'
+                nc.remove_gateway_router(router['id'])
+                for port in nc.list_ports()['ports']:
+                    if port['device_id'] == router['id']:
+                        print 'remove router port %s' % port['id']
+                        nc.remove_interface_router(router['id'],{'port_id': port['id']})
+                print 'deleting router %s' % router['id']
+                try:
+                    nc.delete_router(router['id'])
+                except:
+                    print 'could not delete router %s' % router['id']
+                    if router['tenant_id'] not in tenants_not_to_remove:
+                        tenants_not_to_remove.append(router['tenant_id'])
+    except NotFound:
+		pass
                     
     # remove lbaas pools
     nc = _get_neutron_client()
-    for lbpool in nc.list_lbaas_pools()['pools']:
-        if lbpool['tenant_id'] not in exempt_tenants:
-            print 'deleting LBaaS pool %s' % lbpool['id']
-            try:
-                nc.delete_lbaas_pool(lbpool['id'])
-            except:
-                print 'could not delete lbaas pool %s' % lbpool['id']
-                if lbpool['tenant_id'] not in tenants_not_to_remove:
-                    tenants_not_to_remove.append(lbpool['tenant_id'])
-    
-    # remove lbaas listers
-    nc = _get_neutron_client()
-    for lblist in nc.list_listeners()['listeners']:
-        if lblist['tenant_id'] not in exempt_tenants:
-            print 'deleting LBaaS listener %s' % lblist['id']
-            try:
-                nc.delete_listener(lblist['id'])
-            except:
+    try:
+        for lbpool in nc.list_lbaas_pools()['pools']:
+            if lbpool['tenant_id'] not in exempt_tenants:
+                print 'deleting LBaaS pool %s' % lbpool['id']
                 try:
-                    ok_lb_status = ['ACTIVE', 'PENDING_DELETE', 'ERROR']
-                    lbstatus = 'UNKNOWN'
-                    tries = 0
-                    while not lbstatus in ok_lb_status:
-                        lbstatus = nc.show_loadbalancer(
-                            lblist['loadbalancer_id']
-                        )['loadbalancer']['provisioning_status'] 
-                        nc.delete_loadbalancer(lblist['loadbalancer_id'])
-                        time.sleep(5)
-                        if tries > 10:
-                            if not lblist['tenant_id'] in tenants_not_to_remove:
-                                tenants_not_to_remove.append(lblist['tenant_id'])
-                                raise Exception('failed to delete lb')
+                    nc.delete_lbaas_pool(lbpool['id'])
+                except:
+                    print 'could not delete lbaas pool %s' % lbpool['id']
+                    if lbpool['tenant_id'] not in tenants_not_to_remove:
+                        tenants_not_to_remove.append(lbpool['tenant_id'])
+    except NotFound:
+		pass
+    
+    # remove lbaas listeners
+    nc = _get_neutron_client()
+    try:
+        for lblist in nc.list_listeners()['listeners']:
+            if lblist['tenant_id'] not in exempt_tenants:
+                print 'deleting LBaaS listener %s' % lblist['id']
+                try:
                     nc.delete_listener(lblist['id'])
                 except:
-                    if not lblist['tenant_id'] in tenants_not_to_remove:
-                        tenants_not_to_remove.append(lblist['tenant_id'])
-                    print "could not delete lbaas listener %s" % lblist['id']
+                    try:
+                        ok_lb_status = ['ACTIVE', 'PENDING_DELETE', 'ERROR']
+                        lbstatus = 'UNKNOWN'
+                        tries = 0
+                        while not lbstatus in ok_lb_status:
+                            lbstatus = nc.show_loadbalancer(
+                                lblist['loadbalancer_id']
+                            )['loadbalancer']['provisioning_status'] 
+                            nc.delete_loadbalancer(lblist['loadbalancer_id'])
+                            time.sleep(5)
+                            if tries > 10:
+                                if not lblist['tenant_id'] in tenants_not_to_remove:
+                                    tenants_not_to_remove.append(lblist['tenant_id'])
+                                    raise Exception('failed to delete lb')
+                        nc.delete_listener(lblist['id'])
+                    except:
+                        if not lblist['tenant_id'] in tenants_not_to_remove:
+                            tenants_not_to_remove.append(lblist['tenant_id'])
+                        print "could not delete lbaas listener %s" % lblist['id']
+    except NotFound:
+		pass
 
     # remove lbaas loadbalancer
     nc = _get_neutron_client()
-    for lb in nc.list_loadbalancers()['loadbalancers']:
-        if lb['tenant_id'] not in exempt_tenants:
-            print 'deleting LBaaS loadbalancer %s' % lb['id']
-            try:
-                nc.delete_loadbalancer(lb['id'])
-            except:
-                print 'could not delete lbaas loadbalancer %s' % lb['id']
-                if not lb['tenant_id'] in tenants_not_to_remove:
-                    tenants_not_to_remove.append(lb['tenant_id'])
+    try:
+        for lb in nc.list_loadbalancers()['loadbalancers']:
+            if lb['tenant_id'] not in exempt_tenants:
+                print 'deleting LBaaS loadbalancer %s' % lb['id']
+                try:
+                    nc.delete_loadbalancer(lb['id'])
+                except:
+                    print 'could not delete lbaas loadbalancer %s' % lb['id']
+                    if not lb['tenant_id'] in tenants_not_to_remove:
+                        tenants_not_to_remove.append(lb['tenant_id'])
+    except NotFound:
+		pass
     
     # remove networks
     nc = _get_neutron_client()
-    for net in nc.list_networks()['networks']:
-        if net['tenant_id'] not in exempt_tenants:
-            try:
-                already_deleted_ports = []
-                for port in nc.list_ports()['ports']:
-                    if port['network_id'] == net['id']:
-                        if not port['device_owner'].startswith('network'):
-                            if 'trunk_details' in port:
-                                sub_ports = port['trunk_details']['sub_ports']
-                                for port in sub_ports:
-                                    print 'deleting sub_port %s' % port
-                                    nc.delete_port(port)
-                                    already_deleted_ports.append(port)
-                                trunk_id = port['trunk_details']['trunk_id']
-                                if trunk_id:
-                                    print 'deleting trunk %s' % trunk_id
-                                    nc.delete_trunk(trunk_id)
-                            print 'deleting port %s' % port['id']
-                            nc.delete_port(port['id'])
-                for subnet_id in net['subnets']:
-                    print 'deleting subnet %s' % subnet_id
-                    nc.delete_subnet(subnet_id)
-                print 'deleting network %s' % net['id']
-                nc.delete_network(net['id'])
-            except:
-                print 'could not delete network %s' % net['id']
-                if not net['tenant_id'] in tenants_not_to_remove:
-                    tenants_not_to_remove.append(net['tenant_id'])
+    try:
+        for net in nc.list_networks()['networks']:
+            if net['tenant_id'] not in exempt_tenants:
+                try:
+                    already_deleted_ports = []
+                    for port in nc.list_ports()['ports']:
+                        if port['network_id'] == net['id']:
+                            if not port['device_owner'].startswith('network'):
+                                if 'trunk_details' in port:
+                                    sub_ports = port['trunk_details']['sub_ports']
+                                    for port in sub_ports:
+                                        print 'deleting sub_port %s' % port
+                                        nc.delete_port(port)
+                                        already_deleted_ports.append(port)
+                                    trunk_id = port['trunk_details']['trunk_id']
+                                    if trunk_id:
+                                        print 'deleting trunk %s' % trunk_id
+                                        nc.delete_trunk(trunk_id)
+                                print 'deleting port %s' % port['id']
+                                nc.delete_port(port['id'])
+                            if port['device_owner'].startswith('network:f5'):
+                                nc.delete_port(port['id'])
+                    for subnet_id in net['subnets']:
+                        print 'deleting subnet %s' % subnet_id
+                        nc.delete_subnet(subnet_id)
+                    print 'deleting network %s' % net['id']
+                    nc.delete_network(net['id'])
+                except:
+                    print 'could not delete network %s' % net['id']
+                    if not net['tenant_id'] in tenants_not_to_remove:
+                        tenants_not_to_remove.append(net['tenant_id'])
+    except NotFound:
+		pass
 
     # remove security groups
     nc = _get_neutron_client()
-    for sg in nc.list_security_groups()['security_groups']:
-        if sg['tenant_id'] not in exempt_tenants:
-            print "deleting security group %s" % sg['id']
-            try:
-                nc.delete_security_group(sg['id'])
-            except:
-                print 'could not delete security group %s' % sg['id']
-                if not sg['tenant_id'] in tenants_not_to_remove:
-                    tenants_not_to_remove.append(sg['tenant_id'])
+    try:
+        for sg in nc.list_security_groups()['security_groups']:
+            if sg['tenant_id'] not in exempt_tenants:
+                print "deleting security group %s" % sg['id']
+                try:
+                    nc.delete_security_group(sg['id'])
+                except:
+                    print 'could not delete security group %s' % sg['id']
+                    if not sg['tenant_id'] in tenants_not_to_remove:
+                        tenants_not_to_remove.append(sg['tenant_id'])
+    except NotFound:
+		pass
     
     # remove project
     kc = _get_keystone_client()

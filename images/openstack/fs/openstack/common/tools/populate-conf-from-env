@@ -1,24 +1,27 @@
 #!/bin/bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+TOOLDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+ENVDIR="$(pwd)"
 
-cp -f $DIR/../etc/tempest.conf.tmpl $DIR/../etc/tempest.conf
+cp -f $ENVDIR/etc/tempest.conf.tmpl $ENVDIR/etc/tempest.conf
 
-if [[ -e $DIR/../etc/f5-agent.conf.tmpl ]]
+sed -i "s~__DIR__~$ENVDIR~g" $ENVDIR/etc/tempest.conf 
+
+if [[ -e $ENVDIR/etc/f5-agent.conf.tmpl ]]
 then
-    cp -f $DIR/../etc/f5-agent.conf.tmpl $DIR/../etc/f5-agent.conf
+    cp -f $ENVDIR/etc/f5-agent.conf.tmpl $ENVDIR/etc/f5-agent.conf
 fi
 
 
 if [[ ! -z $OS_AUTH_URL ]]
 then
     CONTROLER_IP=$(echo $OS_AUTH_URL|cut -d'/' -f3|cut -d':' -f1)
-    sed -i s/__CONTROLLER__/$CONTROLER_IP/g $DIR/../etc/tempest.conf
+    sed -i s/__CONTROLLER__/$CONTROLER_IP/g $ENVDIR/etc/tempest.conf
 fi
 
 if [[ ! -z $OS_PASSWORD ]]
 then
-    sed -i s/__ADMIN_PASSWORD__/$OS_PASSWORD/g $DIR/../etc/tempest.conf
+    sed -i s/__ADMIN_PASSWORD__/$OS_PASSWORD/g $ENVDIR/etc/tempest.conf
 fi
 
 for network in $(neutron net-list 2>/dev/null | tail -n +4 | head -n -1 | awk '{print $2}')
@@ -26,7 +29,7 @@ do
     is_external=$(neutron net-show $network 2>/dev/null |grep router:external|grep True|wc -l)
     if [[ $is_external == 1 ]]
     then
-        sed -i s/__EXTERNAL_NETWORK__/$network/g $DIR/../etc/tempest.conf
+        sed -i s/__EXTERNAL_NETWORK__/$network/g $ENVDIR/etc/tempest.conf
         break
     fi
 done
@@ -38,7 +41,7 @@ do
     is_cirros=$(glance image-show $image 2>/dev/null |grep cirros|wc -l)
     if [[ $is_cirros == 1 ]]
     then
-        sed -i s/__CIRROS_IMAGE_ID__/$image/g $DIR/../etc/tempest.conf
+        sed -i s/__CIRROS_IMAGE_ID__/$image/g $ENVDIR/etc/tempest.conf
         download_cirros=0
         break
     fi
@@ -51,7 +54,7 @@ then
     glance image-create --architecture x86_64 --protected False --name cirros-os-image --container-format bare --disk-format qcow2 --file /tmp/cirros.img
     image_id=$(glance image-list 2>/dev/null |grep cirros-os-image | awk '{print $2}')
     glance image-update $image_id --property visibility=public
-    sed -i s/__CIRROS_IMAGE_ID__/$image_id/g $DIR/../etc/tempest.conf
+    sed -i s/__CIRROS_IMAGE_ID__/$image_id/g $ENVDIR/etc/tempest.conf
 fi
 
 
@@ -60,18 +63,18 @@ if [[ $flavor_small == 0 ]]
 then
     flavor_id=$(uuidgen)
     nova flavor-create m1.small $flavor_id 2048 20 1
-    sed -i s/__FLAVOR_ID__/$flavor_id/g $DIR/../etc/tempest.conf
+    sed -i s/__FLAVOR_ID__/$flavor_id/g $ENVDIR/etc/tempest.conf
 else
     flavor_id=$(nova flavor-list|grep m1.small|awk '{print $2}')
-    sed -i s/__FLAVOR_ID__/$flavor_id/g $DIR/../etc/tempest.conf
+    sed -i s/__FLAVOR_ID__/$flavor_id/g $ENVDIR/etc/tempest.conf
 fi
 
-if [[ -e $DIR/../etc/f5-agent.conf ]]
+if [[ -e $ENVDIR/etc/f5-agent.conf ]]
 then
-    icontrol_endpoints=$($DIR/../tools/icontrol_endpoints.py)    
-    sed -i s/__ICONTROL_ENDPOINTS__/$icontrol_endpoints/g $DIR/../etc/f5-agent.conf
-    sed -i s/__ENVIRONMENT_PREFIX__/${BIGIP_ENVIRONMENT_PREFIX}/g $DIR/../etc/f5-agent.conf
-    sed -i s/__BIGIP_USERNAME__/${BIGIP_USERNAME}/g $DIR/../etc/f5-agent.conf
-    sed -i s/__BIGIP_PASSWORD__/${BIGIP_PASSWORD}/g $DIR/../etc/f5-agent.conf
+    icontrol_endpoints=$($ENVDIR/tools/icontrol_endpoints.py)    
+    sed -i s/__ICONTROL_ENDPOINTS__/$icontrol_endpoints/g $ENVDIR/etc/f5-agent.conf
+    sed -i s/__ENVIRONMENT_PREFIX__/${BIGIP_ENVIRONMENT_PREFIX}/g $ENVDIR/etc/f5-agent.conf
+    sed -i s/__BIGIP_USERNAME__/${BIGIP_USERNAME}/g $ENVDIR/etc/f5-agent.conf
+    sed -i s/__BIGIP_PASSWORD__/${BIGIP_PASSWORD}/g $ENVDIR/etc/f5-agent.conf
 fi
 

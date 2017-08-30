@@ -1,1 +1,1 @@
-../../../common/tools/clean-os-from-testing.sh
+../../common/tools/clean-os-from-testing.sh

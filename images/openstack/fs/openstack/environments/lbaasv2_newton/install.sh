@@ -42,7 +42,8 @@ cd $DIR
               && pip install -r ./neutron_lbaas/requirements.txt \
               && pip install -r ./neutron_lbaas/test-requirements.txt \
               && pip install f5-openstack-agent junitxml python-heatclient \
-              && pip install python-keystoneclient python-glanceclient python-novaclient python-neutronclient python-heatclient"
+              && pip install python-keystoneclient python-glanceclient python-novaclient python-neutronclient python-heatclient \
+              && pip install --upgrade f5-sdk"
 
 # patch files
 find $DIR/neutron_lbaas/tests/tempest/v2 -exec sed -i 's/127.0/128.0/g' {} \; 2>/dev/null
