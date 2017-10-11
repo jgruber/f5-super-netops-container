@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ENV=lbaasv2_newton
+ENV=lbaasv2_ospv10
 BASE_DIR=/openstack
 
 enabled_var="enable_$ENV"

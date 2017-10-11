@@ -1,0 +1,15 @@
+#!/bin/bash
+
+export ENV=lbaasv2_ospv10
+export BASE_DIR=/openstack
+export WORKINGDIRECTORY=$BASE_DIR/$ENV
+export TEMPEST_CONFIG_DIR=$WORKINGDIRECTORY/etc
+
+. $BASE_DIR/init-functions
+
+validate_os_creds
+validate_bigip_creds
+
+cd $WORKINGDIRECTORY
+. ./bin/activate
+./tools/populate-conf-from-env

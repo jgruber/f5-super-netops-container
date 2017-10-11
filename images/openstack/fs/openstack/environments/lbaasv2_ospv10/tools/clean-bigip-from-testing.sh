@@ -1,0 +1,1 @@
+../../common/tools/clean-bigip-from-testing.sh

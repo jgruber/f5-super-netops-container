@@ -1,0 +1,1 @@
+../../common/tools/clean-os-from-testing.sh

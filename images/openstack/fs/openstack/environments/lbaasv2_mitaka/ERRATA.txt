@@ -30,7 +30,7 @@ The following test does not properly account for firewall behavior. F5 BIG-IP de
     neutron_lbaas.tests.tempest.v2.scenario.test_listener_basic.TestListenerBasic.test_listener_basic
 
 
-The following test have python run-time errors under stable/mitaka.
+The following test have python run-time errors under mitaka-eol.
 
     All test referenced in the following python module:
 

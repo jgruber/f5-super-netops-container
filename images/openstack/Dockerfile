@@ -54,6 +54,9 @@ ENV enable_neutron_newton=1
 # test neutron lbaasv2 in a newton openstack cloud 
 ENV enable_lbaasv2_newton=1
 
+# test neutron in a ospv10 openstack cloud
+ENV enable_lbaasv2_ospv10=1
+
 # test neutron in a ocata openstack cloud
 ENV enable_neutron_ocata=0
 
