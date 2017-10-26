@@ -1,0 +1,302 @@
+<testsuite errors="0" failures="2" name="" tests="252" time="3533.160">
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitor_admin.TestHealthMonitors" name="test_create_health_monitor_empty_tenant_id_field[negative]" time="0.028"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitor_admin.TestHealthMonitors" name="test_create_health_monitor_for_another_tenant_id_field[smoke]" time="8.189"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitor_admin.TestHealthMonitors" name="test_create_health_monitor_missing_tenant_id_field[smoke]" time="8.273"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor[smoke]" time="8.344"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_empty_delay[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_empty_expected_codes[negative]" time="0.163"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_empty_max_admin_state_up[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_empty_max_http_method[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_empty_max_pool_id[negative]" time="0.171"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_empty_max_retries[negative]" time="0.173"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_empty_max_url_path[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_empty_timeout[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_empty_type[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_extra_attribute[negative]" time="0.153"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_invalid_admin_state_up[negative]" time="0.014"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_invalid_attribute[negative]" time="0.679"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_invalid_delay[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_invalid_expected_codes[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_invalid_http_method[negative]" time="0.155"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_invalid_max_retries[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_invalid_pool_id[negative]" time="0.015"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_invalid_tenant_id[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_invalid_timeout[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_invalid_type[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_invalid_url_path[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_missing_admin_state_up[smoke]" time="7.816"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_missing_attribute[smoke]" time="0.144"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_missing_expected_codes[smoke]" time="9.299"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_missing_http_method[smoke]" time="11.459"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_missing_required_field_delay[smoke]" time="0.027"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_missing_required_field_max_retries[smoke]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_missing_required_field_pool_id[smoke]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_missing_required_field_timeout[smoke]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_missing_required_field_type[smoke]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_create_health_monitor_missing_url_path[smoke]" time="8.644"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_delete_health_monitor[smoke]" time="8.854"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_get_health_monitor[smoke]" time="7.986"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_list_health_monitors_empty[smoke]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_list_health_monitors_one[smoke]" time="8.041"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_list_health_monitors_two[smoke]" time="44.774"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor[smoke]" time="15.178"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_empty_admin_state_up[negative]" time="9.077"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_empty_delay[negative]" time="11.056"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_empty_empty_http_method[negative]" time="8.508"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_empty_expected_codes[negative]" time="7.627"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_empty_max_retries[negative]" time="8.921"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_empty_timeout[negative]" time="10.436"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_empty_url_path[negative]" time="10.176"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_extra_attribute[smoke]" time="14.532"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_invalid_admin_state_up[negative]" time="7.670"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_invalid_attribute[negative]" time="6.247"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_invalid_delay[negative]" time="7.340"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_invalid_expected_codes[negative]" time="8.311"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_invalid_http_method[negative]" time="9.928"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_invalid_max_retries[negative]" time="12.909"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_invalid_timeout[negative]" time="7.673"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_invalid_url_path[negative]" time="8.747"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_missing_admin_state_up[smoke]" time="17.458"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_missing_delay[smoke]" time="12.324"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_missing_expected_codes[smoke]" time="13.865"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_missing_http_method[smoke]" time="12.595"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_missing_max_retries[smoke]" time="13.177"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_missing_timeout[smoke]" time="18.608"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_health_monitors_non_admin.TestHealthMonitors" name="test_update_health_monitor_missing_url_path[smoke]" time="10.015"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_admin.ListenersTestJSON" name="test_create_listener_empty_tenant_id[negative]" time="0.301"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_admin.ListenersTestJSON" name="test_create_listener_invalid_tenant_id[smoke]" time="6.726"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_admin.ListenersTestJSON" name="test_create_listener_missing_tenant_id[smoke]" time="5.115"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener[smoke]" time="8.106"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_empty_admin_state_up[negative]" time="0.105"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_empty_connection_limit[negative]" time="0.135"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_empty_description[smoke]" time="7.064"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_empty_load_balancer_id[negative]" time="0.236"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_empty_name[smoke]" time="5.284"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_empty_protocol[negative]" time="0.252"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_empty_protocol_port[negative]" time="0.116"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_empty_tenant_id[negative]" time="0.112"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_incorrect_attribute[negative]" time="0.115"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_invalid_admin_state_up[negative]" time="0.237"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_invalid_connection_limit[negative]" time="0.115"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_invalid_description[negative]" time="0.241"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_invalid_load_balancer_id[negative]" time="0.130"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_invalid_name[negative]" time="0.261"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_invalid_protocol[negative]" time="0.246"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_invalid_protocol_port[negative]" time="0.272"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_invalid_tenant_id[negative]" time="0.273"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_missing_admin_state_up[smoke]" time="11.373"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_missing_field_loadbalancer[negative]" time="0.168"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_missing_field_protocol[negative]" time="0.109"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_create_listener_missing_field_protocol_port[negative]" time="0.113"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_delete_listener[smoke]" time="5.417"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_get_listener[smoke]" time="0.253"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_list_listeners[smoke]" time="0.436"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_list_listeners_two[smoke]" time="6.279"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener[smoke]" time="2.652"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_empty_admin_state_up[negative]" time="0.106"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_empty_connection_limit[negative]" time="0.130"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_empty_description[smoke]" time="3.884"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_empty_name[smoke]" time="3.504"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_empty_tenant_id[negative]" time="0.130"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_incorrect_attribute[negative]" time="0.104"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_invalid_admin_state_up[negative]" time="0.100"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_invalid_connection_limit[negative]" time="0.100"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_invalid_description[negative]" time="0.110"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_invalid_name[negative]" time="0.110"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_invalid_tenant_id[negative]" time="0.268"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_missing_admin_state_up[smoke]" time="3.862"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_missing_connection_limit[smoke]" time="3.713"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_missing_description[smoke]" time="3.885"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_listeners_non_admin.ListenersTestJSON" name="test_update_listener_missing_name[smoke]" time="4.124"/>
+<testcase classname="" name="setUpClass (neutron_lbaas.tests.tempest.v2.api.test_load_balancers_admin.LoadBalancersTestAdmin)" time="0.000">
+<failure type="testtools.testresult.real._StringException">Traceback (most recent call last):
+testtools.testresult.real._StringException: Traceback (most recent call last):
+  File "/openstack/lbaasv2_ospv10/neutron_lbaas/tests/tempest/v2/api/base.py", line 128, in setUpClass
+    super(BaseTestCase, cls).setUpClass()
+  File "/openstack/lbaasv2_ospv10/tempest/test.py", line 273, in setUpClass
+    six.reraise(etype, value, trace)
+  File "/openstack/lbaasv2_ospv10/tempest/test.py", line 266, in setUpClass
+    cls.resource_setup()
+  File "/openstack/lbaasv2_ospv10/neutron_lbaas/tests/tempest/v2/api/test_load_balancers_admin.py", line 49, in resource_setup
+    cls._wait_for_load_balancer_status(cls.load_balancer['id'])
+  File "/openstack/lbaasv2_ospv10/neutron_lbaas/tests/tempest/v2/api/base.py", line 221, in _wait_for_load_balancer_status
+    operating_status=operating_status))
+tempest.lib.exceptions.TimeoutException: Request timed out
+Details: Wait for load balancer ran for 600 seconds and did not observe 2a3d2ce6-0be9-461f-b12e-027893122567 reach ACTIVE provisioning status and ONLINE operating status.
+
+</failure>
+</testcase>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer[smoke]" time="19.510"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_empty_admin_state_up_field[negative]" time="0.021"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_empty_description_field[smoke]" time="19.784"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_empty_name[smoke]" time="11.580"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_empty_provider_field[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_empty_tenant_id_field[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_empty_vip_address_field[negative]" time="0.010"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_empty_vip_subnet_id[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_incorrect_attribute[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_invalid_description[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_invalid_flavor_field[negative]" time="0.272"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_invalid_name[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_invalid_tenant_id[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_invalid_vip_subnet_id[negative]" time="0.169"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_missing_admin_state_up[smoke]" time="19.135"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_missing_description[smoke]" time="12.878"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_missing_name[smoke]" time="14.866"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_missing_provider_field[smoke]" time="13.837"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_missing_tenant_id_field[smoke]" time="19.325"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_missing_vip_address[smoke]" time="22.016"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_missing_vip_subnet_id_field[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_other_tenant_id_field[negative]" time="0.016"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_create_load_balancer_provider_flavor_conflict[negative]" time="0.136"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_delete_load_balancer[smoke]" time="19.948"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_get_load_balancer[smoke]" time="0.096"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_get_load_balancer_stats[smoke]" time="0.470"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_get_load_balancer_status_tree[smoke]" time="0.099"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_list_load_balancers[smoke]" time="0.094"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_list_load_balancers_two[smoke]" time="12.769"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_update_load_balancer[smoke]" time="6.469"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_update_load_balancer_empty_admin_state_up_field[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_update_load_balancer_empty_description[smoke]" time="4.248"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_update_load_balancer_empty_name[smoke]" time="5.249"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_update_load_balancer_incorrect_attribute[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_update_load_balancer_invalid_admin_state_up_field[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_update_load_balancer_invalid_description[negative]" time="0.014"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_update_load_balancer_invalid_name[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_update_load_balancer_missing_admin_state_up[smoke]" time="3.036"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_update_load_balancer_missing_description[smoke]" time="1.881"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_load_balancers_non_admin.LoadBalancersTestJSON" name="test_update_load_balancer_missing_name[smoke]" time="4.048"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_admin.MemberTestJSON" name="test_create_member_empty_tenant_id[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_admin.MemberTestJSON" name="test_create_member_invalid_tenant_id[smoke]" time="8.641"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_add_member[smoke]" time="7.385"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_empty_address[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_empty_admin_state_up[negative]" time="0.016"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_empty_protocol_port[negative]" time="0.014"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_empty_subnet_id[negative]" time="0.165"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_empty_tenant_id[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_empty_weight[negative]" time="0.158"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_invalid_address[negative]" time="0.147"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_invalid_admin_state_up[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_invalid_protocol_port[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_invalid_subnet_id[negative]" time="0.153"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_invalid_tenant_id[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_invalid_weight[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_missing_required_field_address[negative]" time="0.015"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_missing_required_field_protocol_port[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_missing_required_field_subnet_id[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_missing_required_field_tenant_id[smoke]" time="11.950"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_create_member_nonint_weight[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_delete_member[smoke]" time="9.297"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_get_member[smoke]" time="7.651"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_list_3_members[smoke]" time="34.082"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_list_empty_members[smoke]" time="0.032"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_raises_BadRequest_when_missing_attrs_during_member_create[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_raises_exception_on_invalid_attr_on_create[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_raises_exception_on_invalid_attr_on_update[negative]" time="8.885"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_raises_immutable_when_updating_immutable_attrs_on_member[negative]" time="7.359"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_update_member[smoke]" time="13.621"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_update_member_empty_admin_state_up[negative]" time="10.968"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_update_member_empty_weight[negative]" time="9.687"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_update_member_invalid_admin_state_up[negative]" time="10.182"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_update_member_invalid_weight[negative]" time="10.166"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_update_member_missing_admin_state_up[smoke]" time="20.686"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_members_non_admin.MemberTestJSON" name="test_update_member_missing_weight[smoke]" time="12.066"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_admin.TestPools" name="test_create_pool_for_another_tenant[smoke]" time="0.002">
+<skipped>Skipped until Bug: 1468457 is resolved.</skipped>
+</testcase>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_admin.TestPools" name="test_create_pool_missing_tenant_id_for_admin[smoke]" time="0.002">
+<skipped>Skipped until Bug: 1468457 is resolved.</skipped>
+</testcase>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_admin.TestPools" name="test_create_pool_missing_tenant_id_for_other_tenant[smoke]" time="0.002">
+<skipped>Skipped until Bug: 1468457 is resolved.</skipped>
+</testcase>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_admin.TestPools" name="test_create_pool_using_empty_tenant_field[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_admin.TestPools" name="test_delete_pool[smoke]" time="11.069"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_admin.TestPools" name="test_update_pool_sesssion_persistence_app_cookie[smoke]" time="22.537"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_admin.TestPools" name="test_update_pool_sesssion_persistence_app_to_http[smoke]" time="26.564"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool[smoke]" time="11.110"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_empty_admin_state_up[negative]" time="0.160"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_empty_algorithm[negative]" time="0.013"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_empty_description_field[smoke]" time="16.858"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_empty_listener_field[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_empty_name_field[smoke]" time="14.708"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_empty_protocol[negative]" time="0.014"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_empty_session_persistence_field[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_empty_tenant_field[negative]" time="0.014"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_for_other_tenant_field[negative]" time="0.018"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_incorrect_attribute[negative]" time="0.165"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_invalid_admin_state_up[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_invalid_algorithm[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_invalid_desc_field[negative]" time="0.120"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_invalid_listener_field[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_invalid_name_field[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_invalid_protocol[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_invalid_session_persistence_field[negative]" time="0.011"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_invalid_tenant_id_field[negative]" time="5.666"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_missing_admin_state_up_field[smoke]" time="15.077"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_missing_description_field[smoke]" time="16.714"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_missing_lb_algorithm_field[negative]" time="6.540"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_missing_listener_id_field[negative]" time="0.069"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_missing_name_field[smoke]" time="22.317"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_missing_protocol_field[negative]" time="6.803"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_missing_required_fields[negative]" time="0.012"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_missing_session_pers_field[smoke]" time="11.702"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_missing_tenant_field[smoke]" time="16.313"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_with_session_persistence_app_cookie[smoke]" time="14.842"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_with_session_persistence_http_cookie[smoke]" time="15.433"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_with_session_persistence_redundant_cookie_name[negative]" time="0.217"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_with_session_persistence_unsupported_type[negative]" time="0.017"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_create_pool_with_session_persistence_without_cookie_name[negative]" time="0.198"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_delete_invalid_pool[smoke]" time="19.089"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_delete_pool[smoke]" time="45.735"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_get_pool[smoke]" time="15.801"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_list_pools_empty[smoke]" time="0.029"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_list_pools_one[smoke]" time="15.636"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_list_pools_two[smoke]" time="48.731"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool[smoke]" time="23.119"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool_empty_admin_state_up[negative]" time="17.424"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool_empty_description[smoke]" time="29.290"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool_empty_name[smoke]" time="30.322"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool_empty_session_persistence[negative]" time="23.139"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool_incorrect_attribute[negative]" time="28.057"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool_invalid_admin_state_up[negative]" time="19.307"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool_invalid_attribute[negative]" time="21.437"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool_invalid_desc[negative]" time="34.283"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool_invalid_name[negative]" time="21.578"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool_invalid_session_persistence[negative]" time="45.802"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool_missing_admin_state_up[smoke]" time="70.725"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool_missing_description[smoke]" time="59.144"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool_missing_name[smoke]" time="50.853"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools" name="test_update_pool_missing_session_persistence[smoke]" time="40.909"/>
+<testcase classname="" name="tearDownClass (neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools)" time="0.000">
+<failure type="testtools.testresult.real._StringException">Traceback (most recent call last):
+testtools.testresult.real._StringException: Traceback (most recent call last):
+  File "/openstack/lbaasv2_ospv10/tempest/test.py", line 311, in tearDownClass
+    six.reraise(etype, value, trace)
+  File "/openstack/lbaasv2_ospv10/tempest/test.py", line 294, in tearDownClass
+    teardown()
+  File "/openstack/lbaasv2_ospv10/neutron_lbaas/tests/tempest/v2/api/base.py", line 121, in resource_cleanup
+    cls._delete_load_balancer, lb_id)
+  File "/openstack/lbaasv2_ospv10/tempest/lib/common/utils/test_utils.py", line 83, in call_and_ignore_notfound_exc
+    return func(*args, **kwargs)
+  File "/openstack/lbaasv2_ospv10/neutron_lbaas/tests/tempest/v2/api/base.py", line 157, in _delete_load_balancer
+    cls.load_balancers_client.delete_load_balancer(load_balancer_id)
+  File "/openstack/lbaasv2_ospv10/neutron_lbaas/tests/tempest/v2/clients/load_balancers_client.py", line 65, in delete_load_balancer
+    .format(load_balancer_id))
+  File "/openstack/lbaasv2_ospv10/tempest/lib/common/rest_client.py", line 301, in delete
+    return self.request('DELETE', url, extra_headers, headers, body)
+  File "/openstack/lbaasv2_ospv10/tempest/lib/common/rest_client.py", line 664, in request
+    resp, resp_body)
+  File "/openstack/lbaasv2_ospv10/tempest/lib/common/rest_client.py", line 777, in _error_checker
+    raise exceptions.Conflict(resp_body, resp=resp)
+tempest.lib.exceptions.Conflict: An object with that identifier already exists
+Details: {u'message': u'listener 4bde4b22-ce67-4c9e-acad-43d204d6b7a4 is using this loadbalancer', u'type': u'EntityInUse', u'detail': u''}
+
+</failure>
+</testcase>
+<testcase classname="neutron_lbaas.tests.tempest.v2.scenario.test_healthmonitor_basic.TestHealthMonitorBasic" name="test_health_monitor_basic[compute,network]" time="128.839"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.scenario.test_listener_basic.TestListenerBasic" name="test_listener_basic[compute,network]" time="150.651"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.scenario.test_load_balancer_basic.TestLoadBalancerBasic" name="test_load_balancer_basic[compute,network]" time="108.366"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.scenario.test_session_persistence.TestSessionPersistence" name="test_session_persistence[compute,network]" time="87.258"/>
+<testcase classname="neutron_lbaas.tests.tempest.v2.scenario.test_shared_pools.TestSharedPools" name="test_shared_pools[compute,network]" time="73.237"/>
+</testsuite>

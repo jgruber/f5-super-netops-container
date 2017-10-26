@@ -1,0 +1,58 @@
+F5 LBaaSv2 Errata for Red Hat OpenStack Platform v10 (Newton Release)
+
+
+
+---------------------------------------------------------------------------------------
+Notice of General Errata on Community Tests Use of IPv4 localhost (127.0.0.1) Addressing
+---------------------------------------------------------------------------------------
+
+The community tests use localhost addresses for various test involving pool members. For proxy gateway devices, like F5 BIG-IPs, this address is invalid for a pool member. The community tests have been altered to replace all instances of localhost IPv4 address space 127/8 with the 128/8 addresses.
+
+The following test files have been updated to replace references from '127' to '128'.
+
+    neutron_lbaas/tests/tempest/v2/ddt/base_ddt.py
+    neutron_lbaas/tests/tempest/v2/api/test_members_admin.py
+    neutron_lbaas/tests/tempest/v2/api/test_members_non_admin.py
+
+
+
+---------------------------------------------------------------------------------------
+Specific Community Test Run for Certification wtih Red Hat OpenStack Platform v10
+---------------------------------------------------------------------------------------
+
+The Red Hat partner certification for LBaaSv2 specifies a set of OpenStack community tests taken from the neutron_lbaas library for stable/newton. The tests which were run are found in the whitelist.txt file included with this ERRATA file. 
+
+Only the tests specified by Red Hat were performed for LBaaSv2 compliance with Red Hat OpenStack Platform v10. Be advised there are other sets of tests in the neutron_lbaas library for stable/newton which are ill maintained and thus excluded by both Red Hat and F5.  
+
+
+
+---------------------------------------------------------------------------------------
+Issues with Tests Defects
+---------------------------------------------------------------------------------------
+
+
+The following set of tests do not properly account for the provisioning status of a loadbalancer being set to DEGRADED when there are no monitored pool members, or all pool members are not active. The DEGRADED state was added by the community to inform the tenant that the loadbalancer service may not perform as expected. F5 has implemented the DEGRADED provisioning status for loadbalancers, which effects the set up and all tests with the following prefix:
+
+    neutron_lbaas.tests.tempest.v2.api.test_load_balancers_admin.LoadBalancersTestAdmin
+
+All test with this prefix are excluded becuase the test setUpClass does not support DEGRADED and will not allow the execution of the tests.
+
+
+
+The following tests were skipped because of OpenStack bug:
+
+https://bugs.launchpad.net/neutron/+bug/1468457
+
+neutron_lbaas.tests.tempest.v2.api.test_pools_admin.TestPools.test_create_pool_for_another_tenant
+neutron_lbaas.tests.tempest.v2.api.test_pools_admin.TestPools.test_create_pool_missing_tenant_id_for_admin
+neutron_lbaas.tests.tempest.v2.api.test_pools_admin.TestPools.test_create_pool_missing_tenant_id_for_other_tenant
+
+
+
+The following tests do not properly tear down, leaving orphaned objects in Neutron and the BIG-IP
+
+neutron_lbaas.tests.tempest.v2.api.test_pools_non_admin.TestPools.*
+
+
+
+
