@@ -58,10 +58,10 @@ ENV enable_lbaasv2_newton=1
 ENV enable_lbaasv2_ospv10=1
 
 # test neutron in a ocata openstack cloud
-ENV enable_neutron_ocata=0
+ENV enable_neutron_ocata=1
 
 # test neutron lbaasv2 in a ocata openstack cloud 
-ENV enable_lbaasv2_ocata=0
+ENV enable_lbaasv2_ocata=1
 
 # create TMOS Virtual Edition images for OpenStack
 ENV enable_image_importer=1
