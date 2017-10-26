@@ -27,7 +27,7 @@ chmod +x $BASE_DIR/init-$ENV
 # copy to the working directory for the environemnt
 mkdir $DIR/build
 
-# liberty-eol version of neutron-lbaas
+# mitaka-eol version of neutron-lbaas
 cd $DIR/build
 
 git clone -b mitaka-eol https://github.com/openstack/neutron.git

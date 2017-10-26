@@ -27,10 +27,10 @@ chmod +x $BASE_DIR/init-$ENV
 # copy to the working directory for the environemnt
 mkdir $DIR/build
 
-# liberty-eol version of neutron-lbaas
+# newton-eol version of neutron-lbaas
 cd $DIR/build
 
-git clone -b stable/newton https://github.com/openstack/neutron.git
+git clone -b newton-eol https://github.com/openstack/neutron.git
 cd $DIR/build/neutron
 mv $DIR/build/neutron/neutron $DIR/neutron
 mv $DIR/build/neutron/requirements.txt $DIR/neutron/requirements.txt
