@@ -28,7 +28,7 @@ chmod +x $BASE_DIR/init-$ENV
 # copy to the working directory for the environemnt
 mkdir $DIR/build
 cd $DIR/build
-git clone -b stable/newton https://github.com/openstack/neutron-lbaas.git
+git clone -b stable/ocata https://github.com/openstack/neutron-lbaas.git
 mv $DIR/build/neutron-lbaas/neutron_lbaas $DIR/
 mv $DIR/build/neutron-lbaas/requirements.txt $DIR/neutron_lbaas/requirements.txt
 mv $DIR/build/neutron-lbaas/test-requirements.txt $DIR/neutron_lbaas/test-requirements.txt
