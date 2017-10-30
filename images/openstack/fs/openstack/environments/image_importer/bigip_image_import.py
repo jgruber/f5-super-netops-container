@@ -13,18 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import glob
 import os
-import socket
 import sys
+import glob
+import zipfile
 import tarfile
 import time
-import uuid
-import zipfile
-
-import paramiko
+import re
 import requests
-
+import paramiko
+import socket
+import uuid
 import keystoneclient.v3.client as ksclient
 import keystoneauth1
 import neutronclient.v2_0.client as netclient
@@ -43,29 +42,62 @@ F5_IMAGE_TEMPLATE = 'https://raw.githubusercontent.com/F5Networks/' + \
 CONTAINERFORMAT = 'bare'
 DISKFORMAT = 'qcow2'
 
-VE_PROPS = \
-    {'ALL': {'os_product':
-             'F5 TMOS Virtual Edition for All Modules. ' +
-             '160G disk, 8 or 16G RAM, 4 or 8 vCPUs.'},
-     'LTM': {'os_product':
-             'F5 TMOS Virtual Edition for Local Traffic Manager. ' +
-             '40G disk, 4 or 8G RAM, 2 or 4 vCPUs.'},
-     '1SLOT': {'os_product':
-               'F5 TMOS Virtual Edition for Local Traffic Manager. ' +
-               ' - Small Footprint Single Version. 8G disk, 4G RAM, 1 vCPUs.'},
-     'iWorkflow': {'os_product':
-                   'F5 TMOS Virtual Edition for iWorkflow ' +
-                   'Orchestration Services. 160G disk, 4G RAM, 2 vCPUs.'},
-     'BIG-IQ': {'os_product':
+VE_PROPS = {
+    '.*ALL.qcow2.zip$': {
+        'metadata': {
+            'os_product':
+                'F5 TMOS Virtual Edition for All Modules. ' +
+                '160G disk, 8 or 16G RAM, 4 or 8 vCPUs.'
+        },
+        'min_disk': 160,
+        'min_ram': 8192
+    },
+    '.*LTM.qcow2.zip$': {
+        'metadata': {
+            'os_product':
+                'F5 TMOS Virtual Edition for Local Traffic Manager. ' +
+                '40G disk, 4 or 8G RAM, 2 or 4 vCPUs.'
+        },
+        'min_disk': 40,
+        'min_ram': 4096
+    },
+    '.*LTM_1SLOT.qcow2.zip$': {
+        'metadata': {
+            'os_product':
+                'F5 TMOS Virtual Edition for Local Traffic Manager. ' +
+                ' - Small Footprint Single Version. 8G disk, 2G RAM, 1 vCPUs.'
+        },
+        'min_disk': 8,
+        'min_ram': 2048
+    },
+    '^iWorkflow': {
+        'metadata': {
+            'os_product':
+                'F5 TMOS Virtual Edition for iWorkflow ' +
+                'Orchestration Services. 160G disk, 4G RAM, 2 vCPUs.'
+        },
+        'min_disk': 160,
+        'min_ram': 4096
+    },
+    '^BIG-IQ.*qcow2.zip': {
+        'metadata': {
+            'os_product':
                 'F5 TMOS Virtual Edition for BIG-IQ ' +
-                'Configuration Management Server. 160G disk, 4G RAM, 2 vCPUs.'}
-     }
-
-VE_REQ = {'ALL': {'min_disk': 160, 'min_ram': 8192},
-          'LTM': {'min_disk': 40, 'min_ram': 4096},
-          '1SLOT': {'min_disk': 8, 'min_ram': 2048},
-          'iWorkflow': {'min_disk': 160, 'min_ram': 4096},
-          'BIG-IQ': {'min_disk': 160, 'min_ram': 4096}}
+                'Configuration Management Server. 160G disk, 4G RAM, 2 vCPUs.'
+        },
+        'min_disk': 160,
+        'min_ram': 4096
+    },
+    '^BIG-IQ.*LARGE.qcow2.zip': {
+        'metadata': {
+            'os_product':
+                'F5 TMOS Virtual Edition for BIG-IQ ' +
+                'Configuration Management Server. 500G disk, 4G RAM, 2 vCPUs.'
+        },
+        'min_disk': 500,
+        'min_ram': 4096
+    }
+}
 
 
 def _make_bigip_inventory():
@@ -81,29 +113,12 @@ def _make_bigip_inventory():
         for packed in vepackage.filelist:
             if packed.filename.startswith(filename[:8]) and \
                packed.filename.endswith('qcow2'):
+                f5_version = 13
                 if filename not in bigip_images:
                     bigip_images[filename] = {'image': None,
                                               'datastor': None,
                                               'readyimage': None,
                                               'file': f5file,
-                                              'archname': filename}
-                if packed.filename.find('DATASTOR') < 0:
-                    bigip_images[filename]['image'] = packed.filename
-                else:
-                    bigip_images[filename]['datastor'] = packed.filename
-
-    # iWorkflow Image Packages
-    for f5file in glob.glob("%s/iWorkflow*.zip" % os.environ['IMAGE_DIR']):
-        vepackage = zipfile.ZipFile(f5file)
-        filename = os.path.basename(f5file)
-        for packed in vepackage.filelist:
-            if packed.filename.startswith(filename[:8]) and \
-               packed.filename.endswith('qcow2'):
-                f5_version = 13
-                if filename not in bigip_images:
-                    bigip_images[filename] = {'image': None,
-                                              'datastor': None,
-                                              'file': file,
                                               'archname': filename}
                 else:
                     last_dash = filename.rfind('-')
@@ -114,6 +129,23 @@ def _make_bigip_inventory():
                         bigip_images[filename]['image'] = packed.filename
                     else:
                         bigip_images[filename]['readyimage'] = packed.filename
+                else:
+                    bigip_images[filename]['datastor'] = packed.filename
+
+    # iWorkflow Image Packages
+    for f5file in glob.glob("%s/iWorkflow*.zip" % os.environ['IMAGE_DIR']):
+        vepackage = zipfile.ZipFile(f5file)
+        filename = os.path.basename(f5file)
+        for packed in vepackage.filelist:
+            if packed.filename.startswith(filename[:8]) and \
+               packed.filename.endswith('qcow2'):
+                if filename not in bigip_images:
+                    bigip_images[filename] = {'image': None,
+                                              'datastor': None,
+                                              'file': file,
+                                              'archname': filename}
+                if packed.filename.find('DATASTOR') < 0:
+                    bigip_images[filename]['image'] = packed.filename
                 else:
                     bigip_images[filename]['datastor'] = packed.filename
 
@@ -411,18 +443,18 @@ def _create_glance_images(f5_heat_template_file, download_server_image,
                                    'CREATE_FAILED',
                                    'DELETE_COMPLETE']
                 while True:
-                    stack = hc.stacks.get(image_stack_id)
-                    print '\tImage importer status is %s' % stack.stack_status
-                    print '         \r'
+                    s = hc.stacks.get(image_stack_id)
+                    print '\tImage importer status is %s         \r' % \
+                        s.stack_status
                     sys.stdout.flush()
-                    if stack.stack_status in stack_completed:
-                        if stack.stack_status == 'CREATE_FAILED':
+                    if s.stack_status in stack_completed:
+                        if s.stack_status == 'CREATE_FAILED':
                             print "\tImage importer web server create failed"
                             print "           "
                             cc = _get_nova_client()
                             cc.keypairs.delete(image_prep_key)
                             sys.exit(1)
-                        if stack.stack_status == 'DELETE_COMPLETE':
+                        if s.stack_status == 'DELETE_COMPLETE':
                             print "\tImage importer web server was deleted"
                             print "             "
                             cc = _get_nova_client()
@@ -436,8 +468,8 @@ def _create_glance_images(f5_heat_template_file, download_server_image,
                 hc = _get_heat_client()
                 hc.stacks.delete(image_stack_id)
 
-                gc = _get_glance_client()
                 # Fix the name to reflect the actual BIG-IP release name
+                gc = _get_glance_client()
                 for uploaded_image in gc.images.list():
                     if uploaded_image.name == glance_image_name:
                         image_properties = {
@@ -445,31 +477,41 @@ def _create_glance_images(f5_heat_template_file, download_server_image,
                             'os_name': 'F5 Traffic Management Operating System'
                         }
                         for ve_type in VE_PROPS:
-                            if final_image_name.find(ve_type) > -1:
-                                image_properties.update(VE_PROPS[ve_type])
+                            p = re.compile(ve_type)
+                            match = p.match(image)
+                            if match:
+                                image_properties.update(
+                                    VE_PROPS[ve_type]['metadata'])
+                                min_disk = 0
+                                min_ram = 0
+                                if 'min_disk' in VE_PROPS[ve_type]:
+                                    min_disk = VE_PROPS[ve_type]['min_disk']
+                                if 'min_ram' in VE_PROPS[ve_type]:
+                                    min_ram = VE_PROPS[ve_type]['min_ram']
 
-                        min_disk = 0
-                        min_ram = 0
-
-                        for ve_type in VE_REQ:
-                            if final_image_name.find(ve_type) > -1:
-                                if 'min_disk' in VE_REQ[ve_type]:
-                                    min_disk = VE_REQ[ve_type]['min_disk']
-                                if 'min_ram' in VE_REQ[ve_type]:
-                                    min_ram = VE_REQ[ve_type]['min_ram']
-
-                        gc.images.update(uploaded_image.id,
-                                         name=final_image_name,
-                                         visibility='public',
-                                         min_disk=min_disk,
-                                         min_ram=min_ram,
-                                         **image_properties)
-            os.unlink(bigip_images[image]['image'])
+                                gc.images.update(uploaded_image.id,
+                                                 name=final_image_name,
+                                                 visibility='public',
+                                                 min_disk=min_disk,
+                                                 min_ram=min_ram,
+                                                 **image_properties)
+                # Let last image stack delete
+                stack_completed = ['DELETE_COMPLETE']
+                hc = _get_heat_client()
+                while True:
+                    s = hc.stacks.get(image_stack_id)
+                    print '\tImage importer status is %s        \r' % \
+                        s.stack_status
+                    sys.stdout.flush()
+                    if s.stack_status in stack_completed:
+                        break
+                    else:
+                        time.sleep(5)
 
         # Add readyimage if defined
         if bigip_images[image]['readyimage']:
             gc = _get_glance_client()
-            image_name = bigip_images[image]['image']
+            image_name = bigip_images[image]['readyimage']
             glance_image_name = image_name.replace('.qcow2', '')
             final_image_name = image.replace('.qcow2.zip', '')
             create_image = True
@@ -488,6 +530,7 @@ def _create_glance_images(f5_heat_template_file, download_server_image,
                     glance_image_name, True
                 )
                 # Fix the name to reflect the actual BIG-IP release name
+                gc = _get_glance_client()
                 for uploaded_image in gc.images.list():
                     if uploaded_image.name == glance_image_name:
                         image_properties = {
@@ -495,25 +538,24 @@ def _create_glance_images(f5_heat_template_file, download_server_image,
                             'os_name': 'F5 Traffic Management Operating System'
                         }
                         for ve_type in VE_PROPS:
-                            if final_image_name.find(ve_type) > -1:
-                                image_properties.update(VE_PROPS[ve_type])
+                            p = re.compile(ve_type)
+                            match = p.match(image)
+                            if match:
+                                image_properties.update(
+                                    VE_PROPS[ve_type]['metadata'])
+                                min_disk = 0
+                                min_ram = 0
+                                if 'min_disk' in VE_PROPS[ve_type]:
+                                    min_disk = VE_PROPS[ve_type]['min_disk']
+                                if 'min_ram' in VE_PROPS[ve_type]:
+                                    min_ram = VE_PROPS[ve_type]['min_ram']
 
-                        min_disk = 0
-                        min_ram = 0
-
-                        for ve_type in VE_REQ:
-                            if final_image_name.find(ve_type) > -1:
-                                if 'min_disk' in VE_REQ[ve_type]:
-                                    min_disk = VE_REQ[ve_type]['min_disk']
-                                if 'min_ram' in VE_REQ[ve_type]:
-                                    min_ram = VE_REQ[ve_type]['min_ram']
-
-                        gc.images.update(uploaded_image.id,
-                                         name=final_image_name,
-                                         visibility='public',
-                                         min_disk=min_disk,
-                                         min_ram=min_ram,
-                                         **image_properties)
+                                gc.images.update(uploaded_image.id,
+                                                 name=final_image_name,
+                                                 visibility='public',
+                                                 min_disk=min_disk,
+                                                 min_ram=min_ram,
+                                                 **image_properties)
                 os.unlink(bigip_images[image]['readyimage'])
 
         # Add datastor if defined
@@ -548,18 +590,6 @@ def _create_glance_images(f5_heat_template_file, download_server_image,
                 os.unlink(bigip_images[image]['datastor'])
 
         print "\n"
-
-        # Let last image stack delete
-        stack_completed = ['DELETE_COMPLETE']
-        while True:
-            stack = hc.stacks.get(image_stack_id)
-            print '\tImage importer status is %s' % stack.stack_status
-            print '        \r'
-            sys.stdout.flush()
-            if stack.stack_status in stack_completed:
-                break
-            else:
-                time.sleep(5)
 
     cc = _get_nova_client()
     cc.keypairs.delete(image_prep_key)
