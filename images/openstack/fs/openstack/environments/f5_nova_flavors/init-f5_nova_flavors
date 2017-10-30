@@ -8,6 +8,36 @@ export WORKINGDIRECTORY=$BASE_DIR/$ENV
 
 validate_os_creds
 
+flavor_exist=$(nova flavor-list|grep m1.tiny|wc -l)
+if [[ ! $flavor_exists == 1 ]]
+then
+    nova flavor-create --is-public true m1.tiny auto 512 1 1
+fi
+
+flavor_exist=$(nova flavor-list|grep m1.small|wc -l)
+if [[ ! $flavor_exists == 1 ]]
+then
+    nova flavor-create --is-public true m1.small auto 2048 20 1
+fi
+
+flavor_exist=$(nova flavor-list|grep m1.medium|wc -l)
+if [[ ! $flavor_exists == 1 ]]
+then
+    nova flavor-create --is-public true m1.medium auto 4096 40 2
+fi
+
+flavor_exist=$(nova flavor-list|grep m1.large|wc -l)
+if [[ ! $flavor_exists == 1 ]]
+then
+    nova flavor-create --is-public true m1.large auto 8192 80 4
+fi
+
+flavor_exist=$(nova flavor-list|grep m1.xlarge|wc -l)
+if [[ ! $flavor_exists == 1 ]]
+then
+    nova flavor-create --is-public true m1.xlarge auto 16384 160 8
+fi
+
 flavor_exist=$(nova flavor-list|grep m1.bigip.1SLOT|wc -l)
 if [[ ! $flavor_exists == 1 ]]
 then
