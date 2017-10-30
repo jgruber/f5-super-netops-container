@@ -295,13 +295,14 @@ def _create_web_server(download_server_image, ext_net):
                        'DELETE_COMPLETE']
     print " "
     while True:
-        stack = hc.stacks.get(web_server_stack_id)
-        print '\tImage importer status is %s          \r' % stack.stack_status,
-        if stack.stack_status in stack_completed:
-            if stack.stack_status == 'CREATE_FAILED':
+        s = hc.stacks.get(web_server_stack_id)
+        status_line = '\tImage importer status is %s' % s.stack_status
+        print status_line, "          \r"
+        if s.stack_status in stack_completed:
+            if s.stack_status == 'CREATE_FAILED':
                 print "Image importer web server create failed"
                 sys.exit(1)
-            if stack.stack_status == 'DELETE_COMPLETE':
+            if s.stack_status == 'DELETE_COMPLETE':
                 print "Image importer web server was deleted"
                 sys.exit(1)
             break
@@ -444,8 +445,9 @@ def _create_glance_images(f5_heat_template_file, download_server_image,
                                    'DELETE_COMPLETE']
                 while True:
                     s = hc.stacks.get(image_stack_id)
-                    print '\tImage importer status is %s         \r' % \
+                    status_line = '\tImage importer status is %s' % \
                         s.stack_status
+                    print status_line, "          \r"
                     sys.stdout.flush()
                     if s.stack_status in stack_completed:
                         if s.stack_status == 'CREATE_FAILED':
