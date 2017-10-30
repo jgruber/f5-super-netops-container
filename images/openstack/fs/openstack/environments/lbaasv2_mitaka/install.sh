@@ -54,4 +54,6 @@ find $DIR/neutron_lbaas/tests/tempest/v2 -exec sed -i 's/127.0/128.0/g' {} \; 2>
 find $DIR/tools -type f -exec chmod +x {} \;
 chmod +x $DIR/run_tests.sh
 
+# create reports directory
+mkdir $DIR/reports
 

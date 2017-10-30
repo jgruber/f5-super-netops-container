@@ -51,4 +51,6 @@ cd $DIR
 find $DIR/tools -type f -exec chmod +x {} \;
 chmod +x $DIR/run_tests.sh
 
+# create reports directory
+mkdir $DIR/reports
 
