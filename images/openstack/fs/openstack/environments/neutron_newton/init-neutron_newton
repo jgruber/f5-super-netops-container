@@ -13,4 +13,3 @@ cd $WORKINGDIRECTORY
 . ./bin/activate
 ./tools/populate-conf-from-env
 
-
