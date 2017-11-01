@@ -58,16 +58,19 @@ ENV enable_lbaasv2_newton=1
 ENV enable_lbaasv2_ospv10=1
 
 # test neutron in a ocata openstack cloud
-ENV enable_neutron_ocata=1
+ENV enable_neutron_ocata=0
 
 # test neutron lbaasv2 in a ocata openstack cloud 
-ENV enable_lbaasv2_ocata=1
+ENV enable_lbaasv2_ocata=0
 
 # create TMOS Virtual Edition images for OpenStack
 ENV enable_image_importer=1
 
 # create Nova Flavor for TMOS Virtual Editions
 ENV enable_f5_nova_flavors=1
+
+# create f5-openstack-hot environment
+ENV enable_f5_openstack_hot=1
 
 RUN /openstack/environments/install.sh
 
