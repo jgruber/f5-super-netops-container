@@ -115,6 +115,13 @@ def _make_bigip_inventory():
         for packed in vepackage.filelist:
             if packed.filename.startswith(filename[:8]) and \
                packed.filename.endswith('qcow2'):
+                f5_version = 13
+                if filename not in bigip_images:
+                    bigip_images[filename] = {'image': None,
+                                              'datastor': None,
+                                              'readyimage': None,
+                                              'file': f5file,
+                                              'archname': filename}
                 if packed.filename.find('DATASTOR') > 0:
                     bigip_images[filename]['datastor'] = packed.filename
                 elif packed.filename.find('BIG-IQ') > 0:
@@ -127,7 +134,6 @@ def _make_bigip_inventory():
                         bigip_images[filename]['image'] = packed.filename
                     else:
                         bigip_images[filename]['readyimage'] = packed.filename
-
     # iWorkflow Image Packages
     for f5file in glob.glob("%s/iWorkflow*.zip" % os.environ['IMAGE_DIR']):
         vepackage = zipfile.ZipFile(f5file)
@@ -135,6 +141,13 @@ def _make_bigip_inventory():
         for packed in vepackage.filelist:
             if packed.filename.startswith(filename[:8]) and \
                packed.filename.endswith('qcow2'):
+                f5_version = 13
+                if filename not in bigip_images:
+                    bigip_images[filename] = {'image': None,
+                                              'datastor': None,
+                                              'readyimage': None,
+                                              'file': f5file,
+                                              'archname': filename}
                 if packed.filename.find('DATASTOR') > 0:
                     bigip_images[filename]['datastor'] = packed.filename
                 elif packed.filename.find('Workflow') > 0:
