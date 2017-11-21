@@ -115,24 +115,18 @@ def _make_bigip_inventory():
         for packed in vepackage.filelist:
             if packed.filename.startswith(filename[:8]) and \
                packed.filename.endswith('qcow2'):
-                f5_version = 13
-                if filename not in bigip_images:
-                    bigip_images[filename] = {'image': None,
-                                              'datastor': None,
-                                              'readyimage': None,
-                                              'file': f5file,
-                                              'archname': filename}
+                if packed.filename.find('DATASTOR') > 0:
+                    bigip_images[filename]['datastor'] = packed.filename
+                elif packed.filename.find('BIG-IQ') > 0:
+                    bigip_images[filename]['image'] = packed.filename
                 else:
                     last_dash = filename.rfind('-')
                     first_dot = filename.find('.')
                     f5_version = int(filename[last_dash+1:first_dot])
-                if packed.filename.find('DATASTOR') < 0:
                     if f5_version < 13:
                         bigip_images[filename]['image'] = packed.filename
                     else:
                         bigip_images[filename]['readyimage'] = packed.filename
-                else:
-                    bigip_images[filename]['datastor'] = packed.filename
 
     # iWorkflow Image Packages
     for f5file in glob.glob("%s/iWorkflow*.zip" % os.environ['IMAGE_DIR']):
@@ -143,7 +137,7 @@ def _make_bigip_inventory():
                packed.filename.endswith('qcow2'):
                 if packed.filename.find('DATASTOR') > 0:
                     bigip_images[filename]['datastor'] = packed.filename
-                elif packed.filename.find('BIG-IQ') > 0:
+                elif packed.filename.find('Workflow') > 0:
                     bigip_images[filename]['image'] = packed.filename
                 else:
                     last_dash = filename.rfind('-')
