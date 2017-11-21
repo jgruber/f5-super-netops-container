@@ -36,9 +36,11 @@ UBUNTU_IMAGE = 'http://cloud-images.ubuntu.com/trusty/current/' + \
                'trusty-server-cloudimg-amd64-disk1.img'
 BIGIP_TAR_IMAGE = 'bigipzips.tar'
 WEB_SERVER_TEMPLATE = './bigip_image_importer_webserver.yaml'
-F5_IMAGE_TEMPLATE = 'https://raw.githubusercontent.com/F5Networks/' + \
-                    'f5-openstack-heat/master/f5_supported/ve/images/' + \
-                    'patch_upload_ve_image.yaml'
+# GIT copy is out of date with Ubuntu repo
+# F5_IMAGE_TEMPLATE = 'https://raw.githubusercontent.com/F5Networks/' + \
+#                    'f5-openstack-heat/master/f5_supported/ve/images/' + \
+#                    'patch_upload_ve_image.yaml'
+F5_IMAGE_TEMPLATE = './patch_upload_ve_image.yaml'
 CONTAINERFORMAT = 'bare'
 DISKFORMAT = 'qcow2'
 
@@ -139,15 +141,18 @@ def _make_bigip_inventory():
         for packed in vepackage.filelist:
             if packed.filename.startswith(filename[:8]) and \
                packed.filename.endswith('qcow2'):
-                if filename not in bigip_images:
-                    bigip_images[filename] = {'image': None,
-                                              'datastor': None,
-                                              'file': file,
-                                              'archname': filename}
-                if packed.filename.find('DATASTOR') < 0:
+                if packed.filename.find('DATASTOR') > 0:
+                    bigip_images[filename]['datastor'] = packed.filename
+                elif packed.filename.find('BIG-IQ') > 0:
                     bigip_images[filename]['image'] = packed.filename
                 else:
-                    bigip_images[filename]['datastor'] = packed.filename
+                    last_dash = filename.rfind('-')
+                    first_dot = filename.find('.')
+                    f5_version = int(filename[last_dash+1:first_dot])
+                    if f5_version < 13:
+                        bigip_images[filename]['image'] = packed.filename
+                    else:
+                        bigip_images[filename]['readyimage'] = packed.filename
 
     return bigip_images
 
@@ -617,7 +622,9 @@ def main():
         sys.exit(1)
     # get supported Image template
     print "Downloading F5 image patch Heat template"
-    f5_heat_template_file = _download_file(F5_IMAGE_TEMPLATE)
+    # GIT copy is out of date with Ubuntu repo
+    # f5_heat_template_file = _download_file(F5_IMAGE_TEMPLATE)
+    f5_heat_template_file = F5_IMAGE_TEMPLATE
 
     # create the download glance image
     print "Getting image to build importer guest instance"

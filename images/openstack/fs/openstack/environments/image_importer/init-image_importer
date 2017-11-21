@@ -9,7 +9,24 @@ export IMAGE_DIR=/bigip_images
 
 validate_os_creds
 
+# change AUTH to v2 AUTH
+proto="$(echo $OS_AUTH_URL | grep :// | sed -e's,^\(.*://\).*,\1,g')"
+url="$(echo ${OS_AUTH_URL/$proto/})"
+host="$(echo $url | cut -d/ -f1 | cut -d: -f1)"
+port="$(echo $url | cut -d: -f2 | cut -d/ -f1)"
+path="$(echo $url | grep / | cut -d/ -f2-)"
+
+ORIGINAL_AUTH_URL=$OS_AUTH_URL
+
+if [[ $path == 'v3' ]]
+then
+    export OS_AUTH_URL="${proto}${host}:5000/v2.0"
+    echo "Using v2.0 AUTH at ${OS_AUTH_URL}"
+fi
+
 cd $WORKINGDIRECTORY
 python bigip_image_import.py
 cd $BASE_DIR
+
+export OS_AUTH_URL=$ORIGINAL_AUTH_URL
 
